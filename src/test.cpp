@@ -1,24 +1,17 @@
-
-#include "map/map.hpp"
+#include "control/control.h"
 #include <iostream>
-#include <string>
 
 
-using namespace map;
 
 
-int main(  ){
+int main(){
+    control::init();
 
+    while(1){
+        int lett = control::get_key();
+        if( lett ) std::cout << lett << "\n";
 
-    Game_map map = Game_map::from_seed( 64, 96, 69 );
-    for( int y=0;  y<map.height();  y++ ){
-        for( int x=0;  x<map.width();  x++ ){
-            std::cout << " " << block_to_char( map.get_block(x, y) ) ;
-        }std::cout << "\n";
+        if( lett == 'q' ) break;
     }
-    map.to_file("test.txt");
-
-
-    return 0;
 
 }

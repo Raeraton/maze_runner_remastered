@@ -1,0 +1,51 @@
+#include "control.h"
+
+#ifdef WIN32
+#include <conio.h>
+
+namespace control{
+    void init(){}
+
+    int get_key(){
+        if( kbhit() )
+            return getch();
+        
+        return 0;
+    }
+}
+#else
+#include <ctype.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <termios.h>
+#include <unistd.h>
+
+
+
+namespace control{
+
+    struct termios orig_termios;
+
+    void init(){
+        tcgetattr(STDIN_FILENO, &orig_termios);
+    
+        struct termios raw = orig_termios;
+        
+        raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
+        //raw.c_oflag &= ~(OPOST);
+        raw.c_cflag |= (CS8);
+        raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
+        raw.c_cc[VMIN] = 0;
+        raw.c_cc[VTIME] = 1;
+        
+        tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+    }
+
+    int get_key(){
+        char c = '\0';
+        read(STDIN_FILENO, &c, 1);
+        return c;
+    }
+
+}
+#endif
