@@ -12,7 +12,12 @@ namespace control{
         
         return 0;
     }
+
+    void clear_screen(){
+        system("cls");
+    }
 }
+
 #else
 #include <ctype.h>
 #include <stdio.h>
@@ -34,7 +39,7 @@ namespace control{
         raw.c_iflag &= ~(BRKINT | ICRNL | INPCK | ISTRIP | IXON);
         //raw.c_oflag &= ~(OPOST);
         raw.c_cflag |= (CS8);
-        raw.c_lflag &= ~(ECHO | ICANON | IEXTEN | ISIG);
+        raw.c_lflag &= ~(ECHO | ICANON | IEXTEN );
         raw.c_cc[VMIN] = 0;
         raw.c_cc[VTIME] = 1;
         
@@ -44,8 +49,17 @@ namespace control{
     int get_key(){
         char c = '\0';
         read(STDIN_FILENO, &c, 1);
+
+        char _;
+        while( read(STDIN_FILENO, &_, 1) == 1 );
+
         return c;
     }
 
+    void clear_screen(){
+        system( "clear" );
+    }
+
 }
+
 #endif

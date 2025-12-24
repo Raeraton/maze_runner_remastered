@@ -1,0 +1,1 @@
+g++ src/test.cpp src/engine.cpp src/control/control.cpp src/map/map.cpp
