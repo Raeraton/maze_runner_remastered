@@ -76,7 +76,12 @@ namespace game{
                 ray_pos += engine::Vector2{ engine::Polar{ ray_res, moving_dir } };
             }
 
-            //dist = min( dist, rows-1 );
+
+            // anti fish eye
+            dist = static_cast<unsigned>( static_cast<double>(dist) * cos(moving_dir-direction) );
+            dist = min( dist, rows-1 );
+
+            
             map::Block ray_landed_point = r_map.get_block( ray_pos.x, ray_pos.y );
             
             out.ray_infos.emplace_back( dist, ray_landed_point );
