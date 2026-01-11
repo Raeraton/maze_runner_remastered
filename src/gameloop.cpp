@@ -7,8 +7,6 @@
 #include <chrono>
 #include <iostream>
 
-#include <thread>
-
 
 int gameloop( map::Game_map& map, double velocity, double fov, double rotation_speed ){
     
@@ -22,15 +20,13 @@ int gameloop( map::Game_map& map, double velocity, double fov, double rotation_s
 
     game::Game_event event = game::Game_event::NOTHING;
 
-    
+
     while( event == game::Game_event::NOTHING ){
 
         event = player.update();
 
         control::clear_screen();
         std::cout << player.render( 128, 32, 0.1 ).to_string();
-
-        std::this_thread::sleep_for( std::chrono::milliseconds(50) );
 
     }
 

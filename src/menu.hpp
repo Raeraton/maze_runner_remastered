@@ -22,9 +22,14 @@ T input_value( const std::string& header, std::function<bool(T)> validator ){
 
         std::cout << header << std::flush;
         std::cin >> out;
+
         if( validator(out) ){
             done = true;
+            break;
         }
+        
+        control::get_key();
+
     }
 
     return out;

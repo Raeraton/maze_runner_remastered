@@ -57,10 +57,10 @@ int main(){
                             velocity = input_value<double>( "Enter velocity: ", [](double v){ return v > 0.0 && v <= 10.0; } );
                             break;
                         case 4:
-                            fov = input_value<double>( "Enter FOV: ", [](double v){ return v > 0.0 && v <= 3.14; } );
+                            fov = input_value<double>( "Enter FOV: ", [](double v){ return v > 0.0 && v <= 360; } );
                             break;
                         case 5:
-                            rotation_speed = input_value<double>( "Enter rotation speed: ", [](double v){ return v > 0.0 && v <= 10.0; } );
+                            rotation_speed = input_value<double>( "Enter rotation speed: ", [](double v){ return v > 0.0 && v <= 360.0; } );
                             break;
                     }
                 }
