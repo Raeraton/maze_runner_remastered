@@ -50,8 +50,8 @@ namespace control{
         char c = '\0';
         read(STDIN_FILENO, &c, 1);
 
-        char _;
-        while( read(STDIN_FILENO, &_, 1) == 1 );
+        char _[64];
+        while( read(STDIN_FILENO, &_, 64) == 64 );
 
         return c;
     }

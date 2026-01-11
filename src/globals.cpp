@@ -4,7 +4,7 @@
 namespace globals{
     
 
-    double _deltatime = 0;
+    double _deltatime = 1.0;
     double& deltatime(){
         return _deltatime;
     }
